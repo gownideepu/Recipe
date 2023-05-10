@@ -15,4 +15,6 @@ public interface MyRepository extends org.springframework.data.jpa.repository.Jp
 //    List<String> findIngediants();
     @Query(value = "SELECT * FROM recipe.my_model where name = :name",nativeQuery = true)
    MyModel findByName(String name);
+
+//    MyModel getbyname(String name);
 }

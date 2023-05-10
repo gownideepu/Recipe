@@ -72,6 +72,11 @@ public class MyServiceImp implements MyService{
     @Override
     public ResponseDto addstep(String name, String step) {
        MyModel data=myRepository.findByName(name);//.orElseThrow(() -> new CustomException("Data not found error :- "));
+        if (data==null)
+        {
+            CustomException customException=new CustomException("The data is not present");
+            return new ResponseDto("exception while fetching the data",customException);
+        }
        data.getInstructions().add(step);
        return new ResponseDto("THe step added to the instructions",myRepository.save(data));
     }
@@ -80,6 +85,11 @@ public class MyServiceImp implements MyService{
         System.out.println("----------------------------");
         MyModel data = myRepository.findByName(name);//orElseThrow(() -> new CustomException("Data not found error :- "));
 //        System.out.println("data "+data);
+        if (data==null)
+        {
+            CustomException customException=new CustomException("The data is not present");
+            return new ResponseDto("exception while fetching the data",customException);
+        }
         int len = 0;
         for (String j : data.getInstructions()) {
 //            System.out.println("Db -"+j +"   "+" step "+step);
